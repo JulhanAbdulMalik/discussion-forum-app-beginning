@@ -7,8 +7,10 @@ import Footer from './components/Footer';
 
 // Pages
 import ThreadsPage from './pages/ThreadsPage';
+import ThreadsDetailPage from './pages/ThreadsDetailPage';
 import LeaderboardsPage from './pages/LeaderboardsPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
@@ -18,8 +20,10 @@ function App() {
       <main className="app-main">
         <Routes>
           <Route path="/" element={<ThreadsPage />} />
+          <Route path="/threads/:id" element={<ThreadsDetailPage />} />
           <Route path="/leaderboards" element={<LeaderboardsPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </main>
 

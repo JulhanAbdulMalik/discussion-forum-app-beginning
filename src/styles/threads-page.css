@@ -10,6 +10,7 @@
 .threads-page__header h2 {
   color: var(--text-primary);
   margin-bottom: 1rem;
+  font-size: 1.8rem;
 }
 
 .threads-page__categories-list {

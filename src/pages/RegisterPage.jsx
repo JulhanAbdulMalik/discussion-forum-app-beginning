@@ -2,14 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
-  // Anda akan menambahkan state untuk setiap input di sini
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
   const handleRegister = (event) => {
     event.preventDefault();
-    // Logika untuk mengirim data registrasi ke server
     console.log('Register attempt with:', {
       name: 'user',
       email: 'user@email.com',

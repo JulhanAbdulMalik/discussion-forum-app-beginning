@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  FaPlus,
   FaRegCommentAlt,
   FaRegThumbsDown,
   FaRegThumbsUp,
@@ -107,6 +108,12 @@ const ThreadsPage = () => {
               </footer>
             </article>
           ))}
+        </div>
+
+        <div className="threads-page__add-thread">
+          <Link to="/add-thread" className="threads-page__add-thread-button">
+            <FaPlus />
+          </Link>
         </div>
       </main>
     </section>

@@ -2,10 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
-  // Nanti, Anda akan menambahkan state untuk email & password di sini
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
   const handleLogin = (event) => {
     event.preventDefault();
 

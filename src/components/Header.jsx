@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import avatar from '../assets/avatar.svg';
 
-const Header = () => {
+const Header = ({ authUser }) => {
   return (
     <header className="app-header">
       <div className="header-container">
@@ -11,9 +12,15 @@ const Header = () => {
         </div>
 
         <div className="header-actions">
-          <div className="user-avatar">
-            <img src={avatar} alt="User Avatar" />
-          </div>
+          {authUser ? (
+            <img
+              className="user-avatar"
+              src={authUser.avatar}
+              alt="User Avatar"
+            />
+          ) : (
+            <img className="user-avatar" src={avatar} alt="User Avatar" />
+          )}
         </div>
       </div>
     </header>

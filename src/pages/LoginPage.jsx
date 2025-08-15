@@ -1,14 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+import { asyncSetAuthUser } from '../states/authUser/action';
 
 const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleLogin = (event) => {
     event.preventDefault();
 
-    console.log('Login attempt with:', {
-      email: 'user@email.com',
-      password: 'userpassword',
-    });
+    dispatch(asyncSetAuthUser({ email, password }));
+    navigate('/');
   };
 
   return (
@@ -23,7 +30,13 @@ const LoginPage = () => {
           <form onSubmit={handleLogin} className="login-page__form">
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input id="email" type="email" placeholder="contoh@email.com" />
+              <input
+                id="email"
+                type="email"
+                placeholder="contoh@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
@@ -31,6 +44,8 @@ const LoginPage = () => {
                 id="password"
                 type="password"
                 placeholder="Masukkan password Anda"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button type="submit" className="login-page__button">

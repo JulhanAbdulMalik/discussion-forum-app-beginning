@@ -36,6 +36,12 @@
   border-color: var(--primary);
 }
 
+.threads-page__category-item.active {
+  background-color: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
 .threads-page__content h2 {
   margin-bottom: 1.5rem;
   color: var(--text-primary);

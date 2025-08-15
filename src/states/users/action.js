@@ -18,20 +18,17 @@ function receiveUsersActionCreator(users) {
 
 function asyncPopulateUsers() {
   return async (dispatch) => {
-    // dispatch(showLoading());
     try {
       const users = await api.getAllUsers();
       dispatch(receiveUsersActionCreator(users));
     } catch (error) {
       alert(error.message);
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncRegisterUser({ name, email, password }) {
   return async () => {
-    // dispatch(showLoading());
     try {
       await api.register({ name, email, password });
     } catch (error) {
@@ -39,7 +36,6 @@ function asyncRegisterUser({ name, email, password }) {
       // re-throw the error to be caught by the component if needed
       throw error;
     }
-    // dispatch(hideLoading());
   };
 }
 

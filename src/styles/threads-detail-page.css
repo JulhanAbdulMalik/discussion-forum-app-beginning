@@ -168,3 +168,27 @@
   gap: 1rem;
   margin-top: 1rem;
 }
+
+.login-prompt-text {
+  margin-top: 2rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  text-align: center;
+  background-color: var(--bg-card);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.login-prompt-text a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.login-prompt-text a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}

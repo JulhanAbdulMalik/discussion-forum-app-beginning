@@ -1,4 +1,3 @@
-// import { hideLoading, showLoading } from '@dimasmds/react-redux-loading-bar';
 import api from '../../utils/api';
 
 const ActionType = {
@@ -98,34 +97,30 @@ function neutralizeVoteCommentActionCreator({ commentId, userId }) {
 
 function asyncReceiveThreadDetail(threadId) {
   return async (dispatch) => {
-    // dispatch(showLoading());
     try {
       const threadDetail = await api.getThreadDetail(threadId);
       dispatch(receiveThreadDetailActionCreator(threadDetail));
     } catch (error) {
       alert(error.message);
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncAddComment({ threadId, content }) {
   return async (dispatch) => {
-    // dispatch(showLoading());
     try {
       const comment = await api.createComment({ threadId, content });
       dispatch(addCommentActionCreator(comment));
     } catch (error) {
       alert(error.message);
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncUpVoteThreadDetail() {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState();
-    // dispatch(showLoading());
+
     dispatch(upVoteThreadDetailActionCreator({ userId: authUser.id }));
     try {
       await api.upVoteThread(threadDetail.id);
@@ -133,14 +128,13 @@ function asyncUpVoteThreadDetail() {
       alert(error.message);
       dispatch(upVoteThreadDetailActionCreator({ userId: authUser.id }));
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncDownVoteThreadDetail() {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState();
-    // dispatch(showLoading());
+
     dispatch(downVoteThreadDetailActionCreator({ userId: authUser.id }));
     try {
       await api.downVoteThread(threadDetail.id);
@@ -148,14 +142,13 @@ function asyncDownVoteThreadDetail() {
       alert(error.message);
       dispatch(downVoteThreadDetailActionCreator({ userId: authUser.id }));
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncNeutralizeVoteThreadDetail() {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState();
-    // dispatch(showLoading());
+
     dispatch(neutralizeVoteThreadDetailActionCreator({ userId: authUser.id }));
     try {
       await api.neutralizeVoteThread(threadDetail.id);
@@ -165,14 +158,13 @@ function asyncNeutralizeVoteThreadDetail() {
         neutralizeVoteThreadDetailActionCreator({ userId: authUser.id })
       );
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncUpVoteComment(commentId) {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState();
-    // dispatch(showLoading());
+
     dispatch(upVoteCommentActionCreator({ commentId, userId: authUser.id }));
     try {
       await api.upVoteComment(threadDetail.id, commentId);
@@ -180,14 +172,13 @@ function asyncUpVoteComment(commentId) {
       alert(error.message);
       dispatch(upVoteCommentActionCreator({ commentId, userId: authUser.id }));
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncDownVoteComment(commentId) {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState();
-    // dispatch(showLoading());
+
     dispatch(downVoteCommentActionCreator({ commentId, userId: authUser.id }));
     try {
       await api.downVoteComment(threadDetail.id, commentId);
@@ -197,14 +188,13 @@ function asyncDownVoteComment(commentId) {
         downVoteCommentActionCreator({ commentId, userId: authUser.id })
       );
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncNeutralizeVoteComment(commentId) {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState();
-    // dispatch(showLoading());
+
     dispatch(
       neutralizeVoteCommentActionCreator({ commentId, userId: authUser.id })
     );
@@ -216,7 +206,6 @@ function asyncNeutralizeVoteComment(commentId) {
         neutralizeVoteCommentActionCreator({ commentId, userId: authUser.id })
       );
     }
-    // dispatch(hideLoading());
   };
 }
 

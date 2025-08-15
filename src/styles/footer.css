@@ -41,7 +41,17 @@
   color: inherit;
 }
 
-.footer-links li a svg {
+.logout-span {
+  margin-top: -3px;
+}
+
+.logout-button {
+  color: #000;
+}
+
+.footer-links li a svg,
+.logout-button svg {
+  color: var(--text-muted);
   font-size: 25px;
   transition: color 0.3s;
 }
@@ -54,6 +64,11 @@
 .footer-links li a:hover svg,
 .footer-links li a:hover span {
   color: var(--primary);
+}
+
+.footer-links li .logout-button:hover svg,
+.footer-links li .logout-button:hover span {
+  color: var(--danger);
 }
 
 /* ========================================= */

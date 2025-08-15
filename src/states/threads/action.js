@@ -1,4 +1,3 @@
-// import { hideLoading, showLoading } from '@dimasmds/react-redux-loading-bar';
 import api from '../../utils/api';
 
 const ActionType = {
@@ -61,34 +60,30 @@ function neutralizeVoteThreadActionCreator({ threadId, userId }) {
 
 function asyncPopulateThreads() {
   return async (dispatch) => {
-    // dispatch(showLoading());
     try {
       const threads = await api.getAllThreads();
       dispatch(receiveThreadsActionCreator(threads));
     } catch (error) {
       alert(error.message);
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncAddThread({ title, body, category }) {
   return async (dispatch) => {
-    // dispatch(showLoading());
     try {
       const thread = await api.createThread({ title, body, category });
       dispatch(addThreadActionCreator(thread));
     } catch (error) {
       alert(error.message);
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncUpVoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser } = getState();
-    // dispatch(showLoading());
+
     // Optimistic update
     dispatch(upVoteThreadActionCreator({ threadId, userId: authUser.id }));
     try {
@@ -98,14 +93,13 @@ function asyncUpVoteThread(threadId) {
       // Revert if API call fails
       dispatch(upVoteThreadActionCreator({ threadId, userId: authUser.id }));
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncDownVoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser } = getState();
-    // dispatch(showLoading());
+
     // Optimistic update
     dispatch(downVoteThreadActionCreator({ threadId, userId: authUser.id }));
     try {
@@ -115,14 +109,13 @@ function asyncDownVoteThread(threadId) {
       // Revert if API call fails
       dispatch(downVoteThreadActionCreator({ threadId, userId: authUser.id }));
     }
-    // dispatch(hideLoading());
   };
 }
 
 function asyncNeutralizeVoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser } = getState();
-    // dispatch(showLoading());
+
     // Optimistic update
     dispatch(
       neutralizeVoteThreadActionCreator({ threadId, userId: authUser.id })
@@ -136,7 +129,6 @@ function asyncNeutralizeVoteThread(threadId) {
         neutralizeVoteThreadActionCreator({ threadId, userId: authUser.id })
       );
     }
-    // dispatch(hideLoading());
   };
 }
 

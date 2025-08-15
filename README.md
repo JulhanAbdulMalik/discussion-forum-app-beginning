@@ -10,3 +10,26 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+<!--  -->
+<!-- Promp AI untuk membuat 'Action (creator)' dan 'Reduser -->
+
+Oke sekarang kita lanjutkan, Saya sedang membuat Aplikasi Forum Diskusi dengan React menggunakan Redux.
+
+Buatkan file baru untuk state leaderboard dengan nama file action.js dengan ketentuan berikut:
+
+State name: leaderboard.
+Action types menyesuaikan semua fungsi API yang tersedia di api.js terkait leaderboard, tolong sesuaikan dan lakukan dengan lengkap.
+Structure data menyesuaikan hasil API dengan state leaderboard
+Buat action creator untuk semua yang berhubungan dengan state leaderboard
+Buat function thunk untuk semua yang berhubungan dengan state leaderboard
+Gaya penulisan, urutan fungsi, dan cara error handling harus sama persis seperti contoh diatas.
+
+Selanjutnya, juga buatkan file reducer.js untuk state leaderboard dengan ketentuan berikut:
+
+State name: leaderboard.
+Gunakan ActionType dari action.js yang berisi:
+Gaya penulisan, error handling, dan struktur kode sama persis seperti contoh.
+Pastikan reducer tetap pure function dan tidak mengubah state secara langsung.
+
+Pastikan Output hanya ada dua file yaitu action.js (untuk Action Creator dari state leaderboard) dan reducer.js (untuk Reducer dari state leaderboard)

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { FaRegThumbsUp, FaRegThumbsDown } from 'react-icons/fa';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -14,6 +13,8 @@ import {
   asyncDownVoteComment,
   asyncNeutralizeVoteComment,
 } from '../states/threadDetail/action';
+import ThreadDetail from '../components/ThreadDetail';
+import ThreadDetailComment from '../components/ThreadDetailComment';
 
 const ThreadsDetailPage = () => {
   const { id } = useParams();
@@ -84,7 +85,6 @@ const ThreadsDetailPage = () => {
     }
   };
 
-  // Tampilkan loading jika data belum siap
   if (!threadDetail) {
     return (
       <div className="loading-container">
@@ -104,126 +104,22 @@ const ThreadsDetailPage = () => {
   return (
     <section className="threads-detail-page">
       {/* Konten Utama Thread */}
-      <article className="thread-detail">
-        <header className="thread-detail__header">
-          <span className="thread-detail__category">
-            #{threadDetail.category}
-          </span>
-          <h1 className="thread-detail__title">{threadDetail.title}</h1>
-          <div className="thread-detail__owner-info">
-            <img
-              src={threadDetail.owner.avatar}
-              alt={threadDetail.owner.name}
-            />
-            <span>
-              {threadDetail.owner.name} •{' '}
-              {new Date(threadDetail.createdAt).toLocaleDateString('id-ID')}
-            </span>
-          </div>
-        </header>
-        <div
-          className="thread-detail__body"
-          dangerouslySetInnerHTML={{ __html: threadDetail.body }}
-        />
-        <footer className="thread-detail__footer">
-          <button
-            type="button"
-            className="vote-button"
-            onClick={() => handleVote('up', threadDetail)}
-          >
-            <FaRegThumbsUp
-              style={{ color: hasVotedUpThread ? 'blue' : 'inherit' }}
-            />{' '}
-            {threadDetail.upVotesBy.length}
-          </button>
-          <button
-            type="button"
-            className="vote-button"
-            onClick={() => handleVote('down', threadDetail)}
-          >
-            <FaRegThumbsDown
-              style={{ color: hasVotedDownThread ? 'red' : 'inherit' }}
-            />{' '}
-            {threadDetail.downVotesBy.length}
-          </button>
-        </footer>
-      </article>
+      <ThreadDetail
+        threadDetail={threadDetail}
+        handleVote={handleVote}
+        hasVotedUpThread={hasVotedUpThread}
+        hasVotedDownThread={hasVotedDownThread}
+      />
 
       {/* Bagian Komentar */}
-      <div className="thread-comments">
-        {authUser ? (
-          <>
-            <h2 className="thread-comments__title">Beri Komentar</h2>
-            <form
-              className="thread-comments__form"
-              onSubmit={handleCommentSubmit}
-            >
-              <textarea
-                placeholder="Tulis komentar Anda di sini..."
-                value={commentContent}
-                onChange={(e) => setCommentContent(e.target.value)}
-              />
-              <button type="submit">Kirim Komentar</button>
-            </form>
-          </>
-        ) : (
-          <p className="login-prompt-text">
-            <Link to="/login">Login</Link> untuk memberi komentar.
-          </p>
-        )}
-        <div className="thread-comments__list-header">
-          <h3>Komentar ({threadDetail.comments.length})</h3>
-        </div>
-        <div className="thread-comments__list">
-          {threadDetail.comments.map((comment) => {
-            const hasVotedUpComment = authUser
-              ? comment.upVotesBy.includes(authUser.id)
-              : false;
-            const hasVotedDownComment = authUser
-              ? comment.downVotesBy.includes(authUser.id)
-              : false;
-            return (
-              <div key={comment.id} className="comment-item">
-                <header className="comment-item__header">
-                  <div className="comment-item__owner-info">
-                    <img src={comment.owner.avatar} alt={comment.owner.name} />
-                    <b>{comment.owner.name}</b>
-                  </div>
-                  <span>
-                    {new Date(comment.createdAt).toLocaleDateString('id-ID')}
-                  </span>
-                </header>
-                <div
-                  className="comment-item__body"
-                  dangerouslySetInnerHTML={{ __html: comment.content }}
-                />
-                <footer className="comment-item__footer">
-                  <button
-                    type="button"
-                    className="vote-button"
-                    onClick={() => handleVote('up', comment, comment.id)}
-                  >
-                    <FaRegThumbsUp
-                      style={{ color: hasVotedUpComment ? 'blue' : 'inherit' }}
-                    />{' '}
-                    {comment.upVotesBy.length}
-                  </button>
-                  <button
-                    type="button"
-                    className="vote-button"
-                    onClick={() => handleVote('down', comment, comment.id)}
-                  >
-                    <FaRegThumbsDown
-                      style={{ color: hasVotedDownComment ? 'red' : 'inherit' }}
-                    />{' '}
-                    {comment.downVotesBy.length}
-                  </button>
-                </footer>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <ThreadDetailComment
+        authUser={authUser}
+        threadDetail={threadDetail}
+        handleVote={handleVote}
+        handleCommentSubmit={handleCommentSubmit}
+        commentContent={commentContent}
+        setCommentContent={setCommentContent}
+      />
     </section>
   );
 };

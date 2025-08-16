@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import avatar from '../assets/avatar.svg';
+import PropTypes from 'prop-types';
 
 const Header = ({ authUser }) => {
   return (
@@ -25,6 +25,10 @@ const Header = ({ authUser }) => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  authUser: PropTypes.object,
 };
 
 export default Header;

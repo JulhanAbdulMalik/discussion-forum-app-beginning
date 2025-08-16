@@ -107,3 +107,9 @@ body {
     opacity: 1;
   }
 }
+
+.loading-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}

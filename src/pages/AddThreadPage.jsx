@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { asyncAddThread } from '../states/threads/action';
+import AddThreadInput from '../components/AddThreadInput';
 
 const AddThreadPage = () => {
   const [title, setTitle] = useState('');
@@ -34,41 +35,15 @@ const AddThreadPage = () => {
         </header>
 
         <main className="add-thread-page__content">
-          <form onSubmit={handleAddThread} className="add-thread-page__form">
-            <div className="form-group">
-              <label htmlFor="title">Judul</label>
-              <input
-                id="title"
-                type="text"
-                placeholder="Judul diskusi"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="category">Kategori (Opsional)</label>
-              <input
-                id="category"
-                type="text"
-                placeholder="contoh: react, javascript"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="body">Diskusi</label>
-              <div className="add-thread-page__diskusi">
-                <textarea
-                  id="body"
-                  placeholder="Tulis diskusi Anda di sini..."
-                  value={body}
-                  onChange={(e) => setBody(e.target.value)}
-                  rows="5"
-                />
-                <button type="submit">Kirim Thread</button>
-              </div>
-            </div>
-          </form>
+          <AddThreadInput
+            handleAddThread={handleAddThread}
+            title={title}
+            setTitle={setTitle}
+            category={category}
+            setCategory={setCategory}
+            body={body}
+            setBody={setBody}
+          />
         </main>
       </div>
     </section>

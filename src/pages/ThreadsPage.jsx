@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  FaPlus,
-  FaRegCommentAlt,
-  FaRegThumbsDown,
-  FaRegThumbsUp,
-} from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -15,6 +10,8 @@ import {
   asyncNeutralizeVoteThread,
 } from '../states/threads/action';
 import { asyncPopulateUsers } from '../states/users/action';
+import ThreadsSelectorCategory from '../components/ThreadsSelectorCategory';
+import ThreadsList from '../components/ThreadsList';
 
 const ThreadsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -70,93 +67,18 @@ const ThreadsPage = () => {
   return (
     <section className="threads-page">
       <header className="threads-page__header">
-        <h2>Kategori Populer</h2>
-        <div className="threads-page__categories-list">
-          <button
-            type="button"
-            className={`threads-page__category-item ${
-              selectedCategory === '' ? 'active' : ''
-            }`}
-            onClick={() => setSelectedCategory('')}
-          >
-            Semua
-          </button>
-          {uniqueCategories.map((category) => (
-            <button
-              key={category}
-              type="button"
-              className={`threads-page__category-item ${
-                selectedCategory === category ? 'active' : ''
-              }`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              #{category}
-            </button>
-          ))}
-        </div>
+        <ThreadsSelectorCategory
+          uniqueCategories={uniqueCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
       </header>
 
       <main className="threads-page__content">
-        <h2>Diskusi Terbaru ({filteredThreads.length})</h2>
-        <div className="threads-page__list">
-          {filteredThreads.map((thread) => (
-            <article key={thread.id} className="threads-page__item">
-              <header className="threads-page__item-header">
-                <span className="threads-page__item-category">
-                  #{thread.category}
-                </span>
-                <Link
-                  to={`/threads/${thread.id}`}
-                  className="threads-page__item-title"
-                >
-                  <h3>{thread.title}</h3>
-                </Link>
-              </header>
-              <div
-                className="threads-page__item-body"
-                dangerouslySetInnerHTML={{ __html: thread.body }}
-              />
-              <footer className="threads-page__item-footer">
-                <button
-                  type="button"
-                  className="threads-page__item-vote-button"
-                  onClick={() => handleVote(thread.id, 'up', thread.hasVotedUp)}
-                >
-                  <FaRegThumbsUp
-                    style={{ color: thread.hasVotedUp ? 'blue' : 'inherit' }}
-                  />{' '}
-                  {thread.upVotesBy.length} Like
-                </button>
-                <button
-                  type="button"
-                  className="threads-page__item-vote-button"
-                  onClick={() =>
-                    handleVote(thread.id, 'down', thread.hasVotedDown)
-                  }
-                >
-                  <FaRegThumbsDown
-                    style={{ color: thread.hasVotedDown ? 'red' : 'inherit' }}
-                  />{' '}
-                  {thread.downVotesBy.length} Dislike
-                </button>
-                <p className="threads-page__item-comments">
-                  <FaRegCommentAlt /> {thread.totalComments} Komentar
-                </p>
-                <span className="threads-page__item-owner">
-                  Dibuat oleh <b>{thread.owner.name}</b>
-                </span>
-                <span className="threads-page__item-created">
-                  Dibuat pada:{' '}
-                  {new Date(thread.createdAt).toLocaleDateString('id-ID', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </span>
-              </footer>
-            </article>
-          ))}
-        </div>
+        <ThreadsList
+          filteredThreads={filteredThreads}
+          handleVote={handleVote}
+        />
 
         {/* Menampilkan "Tambah Thread" jika sudah login */}
         {authUser && (

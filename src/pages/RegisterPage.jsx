@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { asyncRegisterUser } from '../states/users/action';
+import RegisterInput from '../components/RegisterInput';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -33,44 +34,15 @@ const RegisterPage = () => {
         </header>
 
         <main className="register-page__content">
-          <form onSubmit={handleRegister} className="register-page__form">
-            <div className="form-group">
-              <label htmlFor="name">Nama Lengkap</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Nama Anda"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                placeholder="contoh@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button type="submit" className="register-page__button">
-              Daftar
-            </button>
-          </form>
-          <p className="register-page__login-link">
-            Sudah punya akun? <Link to="/login">Masuk di sini</Link>
-          </p>
+          <RegisterInput
+            handleRegister={handleRegister}
+            setName={setName}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            name={name}
+            email={email}
+            password={password}
+          />
         </main>
       </div>
     </section>

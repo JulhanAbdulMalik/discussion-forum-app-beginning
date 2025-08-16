@@ -116,7 +116,7 @@ const ThreadsDetailPage = () => {
               alt={threadDetail.owner.name}
             />
             <span>
-              Dibuat oleh <b>{threadDetail.owner.name}</b> •{' '}
+              {threadDetail.owner.name} •{' '}
               {new Date(threadDetail.createdAt).toLocaleDateString('id-ID')}
             </span>
           </div>
